@@ -138,6 +138,18 @@ static int main_eventHandler(phevEvent_t *event)
                 phev_headLights(event->ctx, opts->operand_on, operationCallback);
                 break;
             }
+            case CMD_HORN:
+            {
+                printf("Turning %s horn\n", opts->operand_on ? "ON" : "OFF");
+                phev_horn(event->ctx, opts->operand_on, operationCallback);
+                break;
+            }
+            case CMD_LOCK:
+            {
+                printf("Turning %s lock\n", opts->operand_on ? "ON" : "OFF");
+                phev_lock(event->ctx, opts->operand_on, operationCallback);
+                break;
+            }
             case CMD_PARKING_LIGHTS:
             {
                 printf("Turning %s parking lights\n", opts->operand_on ? "ON" : "OFF");
@@ -253,7 +265,7 @@ int main(int argc, char *argv[])
 
         switch(ch)
         {
-        case 'r': 
+        case 'r':
         {
             printf("Disconnecting\n");
             phev_disconnect(ctx);
@@ -263,6 +275,18 @@ int main(int argc, char *argv[])
         {
             printf("Lights on\n");
             phev_headLights(ctx,true,operationCallbackNoExit);
+            break;
+        }
+        case 'h':
+        {
+            printf("Horn on\n");
+            phev_horn(ctx,true,operationCallbackNoExit);
+            break;
+        }
+        case 'd':
+        {
+            printf("Lock on\n");
+            phev_lock(ctx,true,operationCallbackNoExit);
             break;
         }
         case 'a':
