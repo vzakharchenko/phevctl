@@ -41,6 +41,7 @@ int phev_args_validate(int arg_num,phev_args_opts_t * opts)
         }
         case CMD_UPDATE:
         case CMD_BATTERY:
+        case CMD_WARNING:
         case CMD_ISLOCKED:
         {
             if(arg_num == 1)
@@ -185,6 +186,7 @@ int phev_args_process_operands(char * arg, int arg_num, phev_args_opts_t * opts)
         case CMD_HVAC_STATUS:
         case CMD_ISLOCKED:
         case CMD_REMAINING_CHARGING_STATUS:
+        case CMD_WARNING:
         case CMD_BATTERY: {
             break;
         }
@@ -209,6 +211,10 @@ int phev_args_process_command(char * arg, int arg_num, phev_args_opts_t * opts)
     if(strcmp(arg,BATTERY) == 0 && arg_num == 0)
     {
         opts->command = CMD_BATTERY;
+    }
+    if(strcmp(arg,WARNING) == 0 && arg_num == 0)
+    {
+        opts->command = CMD_WARNING;
     }
     if(strcmp(arg,ISLOCKED) == 0 && arg_num == 0)
     {

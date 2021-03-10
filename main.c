@@ -72,6 +72,20 @@ static int main_eventHandler(phevEvent_t *event)
             }
             break;
         }
+        case CMD_WARNING:
+        {
+            if (event->reg == KO_WF_CHG_GUN_STATUS_EVR)
+            {
+                int warningMessage = phev_batteryWarning(ctx);
+                if (warningMessage < 0)
+                {
+                    return 0;
+                }
+                printf("Warning message %d\n", warningMessage);
+                exit(0);
+            }
+            break;
+        }
         case CMD_ISLOCKED:
         {
             if (event->reg == KO_WF_DOOR_STATUS_INFO_REP_EVR)
