@@ -86,6 +86,23 @@ static int main_eventHandler(phevEvent_t *event)
             }
             break;
         }
+        case CMD_AC_ERROR:
+        {
+            if (event->reg == 16)
+            {
+                bool error = phev_isACError(ctx);
+                if (error)
+                {
+                    printf("air conditioning error\n");
+                    printf("starting reset error\n");
+                    phev_removeACError(ctx, operationCallback);
+                } else {
+                printf("air conditioning has no error\n");
+                exit(0);
+                }
+            }
+            break;
+        }
         case CMD_ISLOCKED:
         {
             if (event->reg == KO_WF_DOOR_STATUS_INFO_REP_EVR)
