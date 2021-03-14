@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
             char byteStr[2];
 
             strncpy(byteStr, line + i, 2);
-            uint8_t num = (u_int8_t)strtol(byteStr, NULL, 16);
+            uint8_t num = (uint8_t)strtol(byteStr, NULL, 16);
             message[j++] = num;
             // printf("%02X ", num);
         }
