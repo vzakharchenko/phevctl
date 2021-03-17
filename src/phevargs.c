@@ -42,6 +42,9 @@ int phev_args_validate(int arg_num,phev_args_opts_t * opts)
         case CMD_UPDATE:
         case CMD_BATTERY:
         case CMD_AC_ERROR:
+        case CMD_THEFT_ALARM:
+        case CMD_AC_TIMER_ERROR:
+        case CMD_CHARGE_ERROR:
         case CMD_WARNING:
         case CMD_ISLOCKED:
         {
@@ -220,6 +223,18 @@ int phev_args_process_command(char * arg, int arg_num, phev_args_opts_t * opts)
     if(strcmp(arg,AC_ERROR) == 0 && arg_num == 0)
     {
         opts->command = CMD_AC_ERROR;
+    }
+    if(strcmp(arg,THEFT_ALARM) == 0 && arg_num == 0)
+    {
+        opts->command = CMD_THEFT_ALARM;
+    }
+    if(strcmp(arg,AC_TIMER_ERROR) == 0 && arg_num == 0)
+    {
+        opts->command = CMD_AC_TIMER_ERROR;
+    }
+    if(strcmp(arg,CHARGE_ERROR) == 0 && arg_num == 0)
+    {
+        opts->command = CMD_CHARGE_ERROR;
     }
     if(strcmp(arg,ISLOCKED) == 0 && arg_num == 0)
     {

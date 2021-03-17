@@ -104,6 +104,55 @@ static int main_eventHandler(phevEvent_t *event)
             }
             break;
         }
+        case CMD_THEFT_ALARM:
+        {
+            if (event->reg == 20)
+            {
+                int alarm = phev_getAlarmError(ctx);
+                if (alarm>0)
+                {
+                    printf("theft alarm %d\n", alarm);
+                } else {
+                printf("theft alarm none\n");
+                exit(0);
+                }
+            }
+            break;
+        }
+        case CMD_AC_TIMER_ERROR:
+        {
+            if (event->reg == 19)
+            {
+                bool error = phev_isACTimerError(ctx);
+                if (error)
+                {
+                    printf("air conditioning timer error\n");
+                    printf("starting reset error\n");
+                    phev_removeACTimerError(ctx, operationCallback);
+                } else {
+                printf("air conditioning timer has no error\n");
+                exit(0);
+                }
+            }
+            break;
+        }
+        case CMD_CHARGE_ERROR:
+        {
+            if (event->reg == 30)
+            {
+                bool error = phev_isChargeError(ctx);
+                if (error)
+                {
+                    printf("charge error\n");
+                    printf("starting reset error\n");
+                    phev_removeChargeError(ctx, operationCallback);
+                } else {
+                printf("charge has no error\n");
+                exit(0);
+                }
+            }
+            break;
+        }
         case CMD_ISLOCKED:
         {
             if (event->reg == KO_WF_DOOR_STATUS_INFO_REP_EVR)
