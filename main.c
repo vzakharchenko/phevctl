@@ -116,6 +116,7 @@ static int main_eventHandler(phevEvent_t *event)
                     phev_disableTheftAlarm(ctx, operationCallback);
                 } else {
                 printf("theft alarm none\n");
+                exit(0);
                 }
             }
             break;
