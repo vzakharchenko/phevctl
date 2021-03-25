@@ -63,12 +63,9 @@ static int main_eventHandler(phevEvent_t *event)
         {
             if (event->reg == KO_WF_BATT_LEVEL_INFO_REP_EVR)
             {
-                int batt = phev_batteryLevel(ctx);
-                if (batt < 0)
-                {
-                    return 0;
-                }
-                printf("Battery level %d\n", batt);
+                phevServiceBattery_t * batt = phev_batteryLevel(ctx);
+
+                printf("{\"Battery level\":%d,\"heater\":%d }\n", batt->level, batt->heater);
                 exit(0);
             }
             break;
