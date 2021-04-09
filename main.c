@@ -169,6 +169,16 @@ static int main_eventHandler(phevEvent_t *event)
             }
             break;
         }
+        case CMD_PRE_AC_CONT:
+        {
+            if (event->reg == KO_WF_PRE_AC_CONT_EVR)
+            {
+                int code = phev_ACCont(ctx);
+                printf("Pre air conditioning control %d\n", code);
+                exit(0);
+            }
+            break;
+        }
         case CMD_CHARGING_STATUS:
         {
             if (event->reg == KO_WF_OBCHG_OK_ON_INFO_REP_EVR)
